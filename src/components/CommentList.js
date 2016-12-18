@@ -10,12 +10,12 @@ export default class CommentList extends Component {
   render() {
     const {comments} = this.props
     const commentElements = comments? comments.map((comment) => <li key={comment.id}><Comment comment = {comment} /></li>): null
-    return (
+    return comments? (
       <div>
         <button onClick={this.toggleOpen}>{this.getBtnText()}</button>
         <ul>{this.showComments(commentElements)}</ul>
       </div>
-    )
+    ): null
   }
 
   toggleOpen = () => {
