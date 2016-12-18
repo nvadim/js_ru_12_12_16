@@ -21,6 +21,7 @@ export default class Article extends Component {
             <div>
                 <h3 onClick = {this.toggleOpen}>{article.title}</h3>
                 {this.getBody()}
+                {/*фигурные скобки здесь лишние + лучше CommentList внести в getBody*/}
                 {<CommentList comments = {article.comments} />}
             </div>
         )
