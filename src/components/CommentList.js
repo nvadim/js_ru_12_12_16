@@ -9,6 +9,7 @@ export default class CommentList extends Component {
 
   render() {
     const {comments} = this.props
+    //сразу сделай if (!comments) return null; не прийдеться дважды проверять
     const commentElements = comments? comments.map((comment) => <li key={comment.id}><Comment comment = {comment} /></li>): null
     return comments? (
       <div>
@@ -25,6 +26,7 @@ export default class CommentList extends Component {
   }
 
   showComments(commentsElements) {
+    //думаю логичнее ul тоже убирать
     if(this.state.isOpen)
       return commentsElements
     else
