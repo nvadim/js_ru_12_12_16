@@ -30,8 +30,7 @@ export default class CommentList extends Component {
     return (this.state.isOpen)?  <ul>{commentElements}</ul>: null
   }
 
-  getLink = (evt) => {
-    evt.preventDefault();
+  getLink = () => {
     if(this.props.comments)
       return <button onClick={this.toggleOpen}>{(this.state.isOpen)? 'Скрыть': 'Показать'} комментарии</button>
     else
