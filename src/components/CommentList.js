@@ -8,15 +8,12 @@ export default class CommentList extends Component {
   };
 
   render() {
-    const {comments} = this.props
-    //сразу сделай if (!comments) return null; не прийдеться дважды проверять
-    const commentElements = comments? comments.map((comment) => <li key={comment.id}><Comment comment = {comment} /></li>): null
-    return comments? (
+    return (
       <div>
-        <button onClick={this.toggleOpen}>{this.getBtnText()}</button>
-        <ul>{this.showComments(commentElements)}</ul>
+        {this.getLink()}
+        {this.getBody()}
       </div>
-    ): null
+      )
   }
 
   toggleOpen = () => {
@@ -25,19 +22,20 @@ export default class CommentList extends Component {
     })
   }
 
-  showComments(commentsElements) {
-    //думаю логичнее ul тоже убирать
-    if(this.state.isOpen)
-      return commentsElements
-    else
-      return false
+  getBody(commentsElements) {
+    const {comments} = this.props
+    if (!comments || !comments.length) return null;
+    const commentElements = comments.map((comment) => <li key={comment.id}><Comment comment = {comment} /></li>)
+
+    return (this.state.isOpen)?  <ul>{commentElements}</ul>: null
   }
 
-  getBtnText = () => {
-    if(this.state.isOpen)
-      return ('Скрыть комментарии')
+  getLink = (evt) => {
+    evt.preventDefault();
+    if(this.props.comments)
+      return <button onClick={this.toggleOpen}>{(this.state.isOpen)? 'Скрыть': 'Показать'} комментарии</button>
     else
-      return ('Показать комментарии')
+      return 'Комментариев пока нет'
   }
 
 }
